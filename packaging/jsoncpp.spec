@@ -65,6 +65,10 @@ for f in AUTHORS LICENSE NEWS.txt README.md ; do
 done
 install -p -m 0644 dist/doxygen/*/*.{html,png} $RPM_BUILD_ROOT%{_docdir}/%{name}/html
 
+mkdir -p $RPM_BUILD_ROOT%{_includedir}/%{name}/
+ln -sf ../json $RPM_BUILD_ROOT%{_includedir}/%{name}/json
+
+
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
@@ -76,6 +80,7 @@ install -p -m 0644 dist/doxygen/*/*.{html,png} $RPM_BUILD_ROOT%{_docdir}/%{name}
 %files devel
 %{_libdir}/lib%{name}.so
 %{_includedir}/%{jsondir}/
+%{_includedir}/%{name}/%{jsondir}/
 %{_libdir}/pkgconfig/jsoncpp.pc
 
 %files doc
